@@ -74,30 +74,37 @@ function messenger_send_pic(userId,imageURL) {
 }
 
 var messenger_send = function (userId, text) {
-  var options = {
-    uri: 'https://graph.facebook.com/v2.6/me/messages?access_token=' + access_token,
-    method: 'POST',
-    json: {
-      'recipient':{
-        'id': userId
-      },
-      'message':{
-        'text': text
-      }
-    }
-  };
-  request(options);
-  var options2 = {
-    uri: 'https://graph.facebook.com/v2.6/me/messages?access_token=' + access_token,
-    method: 'POST',
-    json: {
-      'recipient':{
-        'id': userId
-      },
-      "sender_action":"typing_on"
-	  }
-  };
-  request(options2);
+	text_portions = [];
+	while (text.length > 0) {
+		var portion = text.substr(0, 637);
+		if (portion.length == 637) {
+			portion = portion + '...';
+		}
+		text_portions.push(portion);
+		text = text.substr(637);
+	}
+
+	var send_portion = function (i) {
+		if (i >= text_portions.length) {
+			return;
+		}
+		var options = {
+	    uri: 'https://graph.facebook.com/v2.6/me/messages?access_token=' + access_token,
+	    method: 'POST',
+	    json: {
+	      'recipient':{
+	        'id': userId
+	      },
+	      'message':{
+	        'text': text_portions[i]
+	      }
+	    }
+	  };
+		request(options).on('response', function () {
+			send_portion(i+1);
+		});
+	}
+	send_portion(0);
 }
 
 app.listen(port, function() {
