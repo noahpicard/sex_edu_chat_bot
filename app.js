@@ -28,8 +28,8 @@ app.post('/messenger', function (req, res) {
     if (event.message && event.message.text) {
       messenger_receive(event);
     } else if(event.postback){
-      if(event.postback.payload == "SEX"){
-      	messenger_send(event.sender.id, "Ask me a question then!");
+      if(event.postback.payload.indexOf("SEX") != -1){
+		  messenger_send(event.sender.id, "Ask me a question then!");
       } else if(event.postback.payload == "PRODUCT"){
       	messenger_send_product_quiz(event.sender.id, "hI");
       } else {
@@ -307,15 +307,15 @@ var messenger_send_quiz = function (userId, text, arr) {
 				  {
 					"type":"postback",
 					"title": arr[1].translatedText,
-					"payload": arr[2].translatedText
+					"payload": "SEX"+arr[1].translatedText
 				  },{
 					"type":"postback",
 					"title": arr[3].translatedText,
-					"payload": arr[4].translatedText
+					"payload": "PRODUCT"
 				  },{
 					"type":"postback",
 					"title": arr[5].translatedText,
-					"payload": arr[6].translatedText
+					"payload": "PERSON"
 				  }
 				]
 			  }
