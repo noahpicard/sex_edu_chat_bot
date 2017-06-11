@@ -4,16 +4,14 @@ var request = require('request');
 var response = require('./response');
 var app = express();
 var port = 8000;
-var secret = require('./secret') || {
-	'verify_token': process.env.VERIFY,
-	'access_token': process.env.ACCESS
-};
+var verify_token = process.env.VERIFY || require('./secret').verify_token;
+var access_token = process.env.ACCESS || require('./secret').access_token;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/messenger', function (req, res) {
-	if (req.query['hub.verify_token'] === secret.verify_token) {
+	if (req.query['hub.verify_token'] === verify_token) {
 		res.send(req.query['hub.challenge'])
 	}
 	res.send('Error, wrong token')
@@ -37,7 +35,7 @@ var messenger_receive = function (event) {
 
 var messenger_send = function (userId, text) {
   var options = {
-    uri: 'https://graph.facebook.com/v2.6/me/messages?access_token=' + secret.access_token,
+    uri: 'https://graph.facebook.com/v2.6/me/messages?access_token=' + access_token,
     method: 'POST',
     json: {
       'recipient':{
