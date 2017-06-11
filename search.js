@@ -1,6 +1,5 @@
 var answers = require('./answers');
 var stopwords = require('./stopwords');
-// var storage = require('./storage');
 
 var makeDictionary = function(d) {
 	var final = {}
@@ -166,28 +165,24 @@ var searchAnswers = function (userId, text) {
 	return responseArr.join(" ");
 }
 
-var respond = function (userId, text) {
+var respond = function (user, text, cb) {
 	text = cleanText(text);
 
 	if (checkGreetings(text)) {
-		return "🐵 I'm Madeliene!\nGreat to meet you!\n\nWhat are you interested in?\n1. I want to learn about sex\n2. I want to get hygiene products\n3. I want to find resources near me"
+		cb(null);
+	} else if (checkLocalResources(text)) {
+		cb(text.substring(5, text.length));
+	} else if (checkFave(text)) {
+		cb("🙉 Aww golly gee! Thanks! 😀");
+	} else if (checkThanks(text)) {
+		cb("🙈 You're welcome! Happy to help! 😀");
+	} else if (checkAgreement(text)) {
+		cb("🙉 That's great to hear!");
+	} else if (checkParting(text)) {
+		cb("🐒 See you later!\nCome by any time you have questions!");
+	} else {
+		cb(searchAnswers(user, text));
 	}
-	if (checkLocalResources(text)) {
-		return text.substring(5, text.length);
-	}
-	if (checkFave(text)) {
-		return "🙉 Aww golly gee! Thanks! 😀"
-	}
-	if (checkThanks(text)) {
-		return "🙈 You're welcome! Happy to help! 😀"
-	}
-	if (checkAgreement(text)) {
-		return "🙉 That's great to hear!"
-	}
-	if (checkParting(text)) {
-		return "🐒 See you later!\nCome by any time you have questions!"
-	}
-	return searchAnswers(userId, text);
 }
 
 module.exports = {

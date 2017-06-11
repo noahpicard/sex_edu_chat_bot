@@ -1,11 +1,11 @@
 var storage = require('./storage');
 var prompts = require('./prompts');
 var options = require('./options');
-var response = require('./response');
-
+var search = require('./search');
 
 var receive = function (user, text, oid, cb) {
   if (oid) {
+    // postbacks
     language = oid.substr(0, 2);
     oid = oid.substr(2);
     var pid = options[oid][1];
@@ -15,6 +15,7 @@ var receive = function (user, text, oid, cb) {
     }), prompt[2], language);
   } else {
     storage.get('state', user, function (err, res) {
+      // get state
       if (!res) {
         trigger_greeting(user, cb);
       } else {
@@ -33,17 +34,29 @@ var receive = function (user, text, oid, cb) {
       if (i >= 0) {
         var oid = prompt[2][i];
         var pid = options[oid][1];
-        var prompt = prompts[pid];
-        cb(prompt[0], prompt[2].map(function (oid) {
-          return options[oid][0];
-        }), prompt[2]);
+        storage.set('state', user, pid, function (err, res) {
+          var prompt = prompts[pid];
+          cb(prompt[0], prompt[2].map(function (oid) {
+            return options[oid][0];
+          }), prompt[2], null);
+        });
       } else {
-        cb(response.respond(user, text), [], []);
+        trigger_search(user, text, cb);
       }
     } else if (prompt[1] == 'search') {
-      cb(response.respond(user, text), [], []);
+      trigger_search(user, text, cb);
     }
   }
+}
+
+var trigger_search = function (user, text, cb) {
+  search.respond(user, text, function (reply) {
+    if (reply) {
+      cb(reply, [], [], null);
+    } else {
+      trigger_greeting(user, cb);
+    }
+  });
 }
 
 var trigger_greeting = function (user, cb) {
