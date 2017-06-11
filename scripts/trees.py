@@ -21,11 +21,11 @@ import json
 ################################
 
 greeting_tree = {
-  ("🐵 I'm Madeleine! 😀 \nGreat to meet you!\n\nI know things might be confusing for you or scary, but I know quite a lot about reproductive health so don't worry! I can help you by answering questions, giving an assessment, or connecting you with local resources! I'm also multi-lingual! What would you like to do?", "buttons"): [
+  ("🐵 I'm Madeleine! 😀 \nGreat to meet you!\n\nI know things might be confusing for you or scary, but I know quite a lot about reproductive health so don't worry! I can help you by answering questions, giving hygiene product recommendations, or connecting you with local resources! I'm also multi-lingual! What would you like to do?", "buttons"): [
     ("I have a question", {
       ("🐵 Great, try asking me a question!\nI can answer something like 'What is a STD?'\nYou can also discover new questions by saying 'Show me random questions!'\nGo for it!", "search"): []
     }),
-    ("Assessment", {
+    ("My hygeine product?", {
       ("🐵 Ok! I'm going to ask you a few questions to see what product is best for you. I know it's hard to figure out which one works best for you! Do you like to exercise during your period?", "buttons"): [
         ("Yes", {
           ("Great! 🙉 You will be most comfortable going with tampons since they make it easier for you to move around, especially if you want to swim.", "search"): []
@@ -43,7 +43,7 @@ greeting_tree = {
               ]
             }),
             ("Light", {
-              ("Great! 🙉 You will be most comfortable going with tampons! They can catch a lot of blood and stay in very well!", "search"): []
+              ("Great! 🙉 You will be most comfortable going with panty liners! They can catch a lot of blood and stay very well!", "search"): []
             })
           ]
         })
