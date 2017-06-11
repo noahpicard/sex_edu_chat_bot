@@ -57,10 +57,6 @@ var receive = function (user, text, oid, cb) {
         } else {
           cb('Couldn\'t find a picture of that--sorry!', [], [], null, null);
         }
-			} else if (prompt[1] == 'locate') {
-        storage.set('location', user, text, function (err, res) {
-	        cb('Location stored', [], [], null, null);
-				});
       } else if (prompt[1] == 'search') {
         trigger_search(user, text, cb);
       }
