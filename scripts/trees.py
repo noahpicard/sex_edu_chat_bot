@@ -36,7 +36,7 @@ greeting_tree = {
       ]
     }),
     ("Find local resources", {
-      ("[unimplmented] ask me a question instead", "search"): []
+      ("What specifically are you looking for?", "image_search"): []
     })
   ]
 }
