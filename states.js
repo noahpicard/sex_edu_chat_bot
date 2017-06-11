@@ -16,7 +16,7 @@ var receive = function (user, text, oid, cb) {
   } else {
     storage.get('state', user, function (err, res) {
       if (!res) {
-        trigger_greeting(user);
+        trigger_greeting(user, cb);
       } else {
         act(res);
       }
@@ -46,7 +46,7 @@ var receive = function (user, text, oid, cb) {
   }
 }
 
-var trigger_greeting = function (user) {
+var trigger_greeting = function (user, cb) {
   storage.set('state', user, 'greeting-p0', function (err, res) {
     prompt = prompts['greeting-p0'];
     cb(prompt[0], prompt[2].map(function (oid) {
