@@ -1,3 +1,6 @@
+const apiKey = 'AIzaSyAlkWwYtc1q1o09XwKEb7KJwlk0cKBP6XQ';
+
+var googleTranslate = require('google-translate')(apiKey);
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
@@ -122,11 +125,19 @@ var messenger_getstartedbutton = function () {
 var messenger_receive = function (event) {
     console.log(event);
     addMonkeyIfPossible(event);
+
+    var text = event.message.text;
     if (event.message.text.includes("local")) {
         getLocalResources(event);
-    } else {
-        messenger_send(event.sender.id, response.respond(event.sender.id, event.message.text));
+        //text = getLocalResources(event);
     }
+
+    googleTranslate.translate(text, 'en', function(err, translation) {
+    	  var reply = response.respond(event.sender.id, translation.translatedText);
+  	  googleTranslate.translate(reply, translation.detectedSourceLanguage, function(err, translation) {
+  		  messenger_send(event.sender.id, translation.translatedText);
+  	  });
+    });
     //messenger_send(event.sender.id, response.respond(event.sender.id, event.message.text));
 }
 
@@ -140,10 +151,12 @@ function getLocalResources(event) {
             var info = JSON.parse(body);
             messenger_send(event.sender.id, response.respond(event.sender.id, "local " + body.substring(0,50)));
             console.log(info);
+            return body.substring(0,50);
         }
     }
     request(options, callback);
 }
+
 function addMonkeyIfPossible(event) {
     if(response.respond(event.sender.id, event.message.text).indexOf("🐵") != -1 && response.respond(event.sender.id, event.message.text).indexOf("😄") != -1){
         //here in respond could toggle if send and image or not! cause respond called here
