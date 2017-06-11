@@ -26,11 +26,18 @@ greeting_tree = {
       ("Ask me a question then!", "search"): []
     }),
     ("Get hygiene products", {
-      ("[unimplmented] ask me a question instead", "search"): []
+      ("Ok! I'm going to ask you a few questions to see what product is best for you. Do you like to exercise during your period?", "buttons"): [
+        ("Yes", {
+          ("Great! You will be most comfortable going with tampons", "search"): []
+        }),
+        ("No", {
+          ("No problem! You will be most comfortable going with pads", "search"): []
+        })
+      ]
     }),
-    ("Talk to a real person", {
+    ("Find local resources", {
       ("[unimplmented] ask me a question instead", "search"): []
-    }),
+    })
   ]
 }
 
