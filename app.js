@@ -1,3 +1,6 @@
+const apiKey = 'AIzaSyAlkWwYtc1q1o09XwKEb7KJwlk0cKBP6XQ';
+
+var googleTranslate = require('google-translate')(apiKey);
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
@@ -30,8 +33,19 @@ app.post('/messenger', function (req, res) {
 
 var messenger_receive = function (event) {
   console.log(event);
+  /*
   addMonkeyIfPossible(event);
   messenger_send(event.sender.id, response.respond(event.sender.id, event.message.text));
+  */
+  var text = event.message.text;
+
+  googleTranslate.translate(text, 'en', function(err, translation) {
+  	  var reply = response.respond(event.sender.id, translation.translatedText);
+	  googleTranslate.translate(reply, translation.detectedSourceLanguage, function(err, translation) {
+		  messenger_send(event.sender.id, translation.translatedText);
+	  });
+  });
+  addMonkeyIfPossible(event);
 }
 
 function addMonkeyIfPossible(event) {
