@@ -20,12 +20,28 @@
     "greeting-p13"
   ], 
   "greeting-o13": [
-    "Not comfortable", 
+    "Local resources", 
     "greeting-p14"
   ], 
   "greeting-o14": [
-    "Comfortable", 
+    "Not comfortable", 
     "greeting-p15"
+  ], 
+  "greeting-o15": [
+    "Comfortable", 
+    "greeting-p16"
+  ], 
+  "greeting-o16": [
+    "Local resources", 
+    "greeting-p17"
+  ], 
+  "greeting-o17": [
+    "Local resources", 
+    "greeting-p18"
+  ], 
+  "greeting-o18": [
+    "Local resources", 
+    "greeting-p19"
   ], 
   "greeting-o2": [
     "Local resources", 

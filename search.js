@@ -142,9 +142,9 @@ var searchAnswers = function (userId, text) {
 		}
 		return '🙊\nI\'m sorry, I didn\'t quite understand that.\nDid you mean:\n"' + closestQuestion +'"';
 	}
-	console.log("RESPONSE:");
-	console.log(closestQuestion);
-	console.log(answerDict[closestQuestion]);
+	//console.log("RESPONSE:");
+	//console.log(closestQuestion);
+	//console.log(answerDict[closestQuestion]);
 
 	var responseArr = [
 		'"'+closestQuestion+'"\n\n🐵',
@@ -191,8 +191,6 @@ var respond = function (user, text, cb) {
 
 	if (texttools.checkGreetings(text)) {
 		cb(null);
-	} else if (texttools.checkLocalResources(text)) {
-		cb(text.substring(5, text.length));
 	} else if (texttools.checkFave(text)) {
 		cb("🙉 Aww golly gee! Thanks! 😀");
 	} else if (texttools.checkThanks(text)) {

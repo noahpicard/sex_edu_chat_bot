@@ -4,6 +4,7 @@ var options = require('./options');
 var search = require('./search');
 var images = require('./images');
 var texttools = require('./texttools');
+var request = require('request');
 
 var receive = function (user, text, oid, cb) {
   if (oid) {
@@ -57,7 +58,10 @@ var receive = function (user, text, oid, cb) {
             cb(images[cleantext].text, [], [], null, images[cleantext].image_url);
           });
         } else {
-          cb('Couldn\'t find a picture of that! Try again?', [], [], null, null);
+          cb('Couldn\'t find a picture of that--sorry!', [], [], null, null);
+		  getLocalResources("syria", function(list) {
+			  cb('But you can ask some local NGOs in your camp: ' + list, [], [], null, null);
+		  });
         }
       } else if (prompt[1] == 'search') {
         trigger_search(user, text, cb);
@@ -66,6 +70,41 @@ var receive = function (user, text, oid, cb) {
       }
     }
   }
+}
+
+var getLocalResources = function(country, cb) {
+	var list = "";
+	var options = {
+        url: 'http://data.unhcr.org/api/whos_doing_what_where/settlements.json?instance_id=' + country,
+        method: 'GET'
+    };
+    function callback(error, resp, body) {
+		console.log(error);
+        if (!error && resp.statusCode == 200) {
+			var count = 0;
+			var settlement = false;
+            var info = JSON.parse(body, function (key, value) {
+				if (key === "name" && value.includes("Zaatari")) {
+					console.log(value + "\n");
+					settlement = true;
+				}
+				if (settlement) {
+					if (key === "name") {
+						settlement == false;
+					}
+					if (key === "sector_name_en" && count < 5) {
+						list += " " + value;
+						count++;
+					}
+					if (key === "organization_acronym" && value && count < 5) {
+						list += " (" + value + "),"
+					}
+				}
+			});
+			cb(list);
+        }
+    }
+    request(options, callback);
 }
 
 var trigger_search = function (user, text, cb) {

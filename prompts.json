@@ -14,9 +14,11 @@
     []
   ], 
   "greeting-p10": [
-    "Great! \ud83d\ude49 You will be most comfortable going with tampons since they make it easier for you to move around, especially if you want to swim.", 
-    "search", 
-    []
+    "Great! \ud83d\ude49 You will be most comfortable going with tampons since they make it easier for you to move around, especially if you want to swim. Check out Local Resources to find out where you can get tampons near you!", 
+    "buttons", 
+    [
+      "greeting-o18"
+    ]
   ], 
   "greeting-p11": [
     "And how would you describe your menstrual flow? \ud83d\ude4a I know it's scary to have a lot of blood come out of your body at once.", 
@@ -30,23 +32,49 @@
     "Finally, how comfortable are you with your body? \ud83d\ude4a", 
     "buttons", 
     [
-      "greeting-o13", 
-      "greeting-o14"
+      "greeting-o14", 
+      "greeting-o15"
     ]
   ], 
   "greeting-p13": [
-    "Great! \ud83d\ude49 You will be most comfortable going with panty liners! They can catch a lot of blood and stay very well!", 
+    "Great! \ud83d\ude49 You will be most comfortable going with panty liners! They can catch a lot of blood and stay very well! Check out Local Resources to find out where you can get panty liners near you.", 
     "search", 
-    []
+    [
+      "greeting-o13"
+    ]
   ], 
   "greeting-p14": [
-    "No problem! \ud83d\ude49 Your best choice is to go with pads! They are super easy to put on and also can hold a lot of blood.", 
-    "search", 
+    "What specifically are you looking for?\ud83d\ude4a", 
+    "image_search", 
     []
   ], 
   "greeting-p15": [
-    "Great! \ud83d\ude49 Your best choice is to go with tampons! They make it easy for you to move around after you learn how to put them on!", 
+    "No problem! \ud83d\ude49 Your best choice is to go with pads! They are super easy to put on and also can hold a lot of blood. Check out Local Resources to find out where you can get pads near you!", 
     "search", 
+    [
+      "greeting-o17"
+    ]
+  ], 
+  "greeting-p16": [
+    "Great! \ud83d\ude49 Your best choice is to go with tampons! They make it easy for you to move around after you learn how to put them on! Check out Local Resources to find out where you can get tampons near you.", 
+    "search", 
+    [
+      "greeting-o16"
+    ]
+  ], 
+  "greeting-p17": [
+    "What specifically are you looking for?\ud83d\ude4a", 
+    "image_search", 
+    []
+  ], 
+  "greeting-p18": [
+    "What specifically are you looking for?\ud83d\ude4a", 
+    "image_search", 
+    []
+  ], 
+  "greeting-p19": [
+    "What specifically are you looking for?\ud83d\ude4a", 
+    "image_search", 
     []
   ], 
   "greeting-p2": [
