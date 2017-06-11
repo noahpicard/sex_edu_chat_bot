@@ -14,20 +14,24 @@ var makeDictionary = function(d) {
 
 var answerDict = makeDictionary(answers);
 
-var checkFave = function(text) {
-	return text.includes("you") && text.includes("fav")
-};
+var removePunc = function(text) {
+	return text.replace(/[.,\/#!?$%\^&\*;:{}=\-_`~()]/g,"");
+}
 
-var checkGreetings = function(text) {
-	return text.includes("hi ") || text.includes("hello") || text.includes("hey")
-};
-
-var checkAgreement = function(text) {
-	return text.includes("yes") || text.includes("yep") || text.includes("okay")
-};
+var hasWords = function(text, wordList) {
+	var arr = text.split(" ");
+	for (i in wordList) {
+		var word = wordList[i];
+		if (arr.indexOf(word) !== -1) {
+			return true;
+		}
+	}
+	return false;
+}
 
 var cleanText = function(text) {
 	text = text.toLowerCase();
+	text = removePunc(text);
 	return text;
 }
 
@@ -43,10 +47,22 @@ var countDict = function(arr) {
 	return dict;
 }
 
+var checkFave = function(text) {
+	return hasWords(text, ["you"]) && hasWords(text, ["best", "fav", "fave", "favorite", "awesome", "smart"]);
+};
+
+var checkGreetings = function(text) {
+	return hasWords(text, ["hi", "hello", "hey"]);
+};
+
+var checkAgreement = function(text) {
+	return hasWords(text, ["yes", "yep", "okay"]);
+};
+
 var stringDistance = function(str1, str2) {
 
-	str1 = str1.replace(/[.,\/#!?$%\^&\*;:{}=\-_`~()]/g,"");
-	str2 = str2.replace(/[.,\/#!?$%\^&\*;:{}=\-_`~()]/g,"");
+	str1 = removePunc(str1);
+	str2 = removePunc(str2);
 	var arr1 = str1.split(" ");
 	var arr2 = str2.split(" ");
 	var matches = 0;
