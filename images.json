@@ -10,5 +10,17 @@
   "pads": {
     "text": "Show this to your local NGO to receive your pads",
     "image_url": "http://girladvice103.weebly.com/uploads/5/9/3/3/59335013/9073522_orig.jpg"
+  },
+  "tampon": {
+    "text": "Show this to your local NGO to receive your tampons",
+    "image_url": "http://i.huffpost.com/gen/1959263/images/o-TAMPONS-facebook.jpg"
+  },
+  "condom": {
+    "text": "Show this to your local NGO to receive your condoms",
+    "image_url": "http://www.newhealthadvisor.com/images/1HT05805/condom.jpg"
+  },
+  "pad": {
+    "text": "Show this to your local NGO to receive your pads",
+    "image_url": "http://girladvice103.weebly.com/uploads/5/9/3/3/59335013/9073522_orig.jpg"
   }
 }
