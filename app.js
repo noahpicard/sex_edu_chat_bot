@@ -183,11 +183,22 @@ function getLocalResources(event) {
 }
 
 function addMonkeyIfPossible(event) {
-    if(response.respond(event.sender.id, event.message.text).indexOf("🐵") != -1 && response.respond(event.sender.id, event.message.text).indexOf("😄") != -1){
+    if(response.respond(event.sender.id, event.message.text).indexOf("🙈") != -1){
         //here in respond could toggle if send and image or not! cause respond called here
         messenger_send_pic(event.sender.id, "http://orig14.deviantart.net/49d9/f/2017/161/2/5/monkeyvictor_by_chibixi-dbcal2t.gif");
-    } else if(response.respond(event.sender.id, event.message.text).indexOf("🐵") != -1){
+    } else if(response.respond(event.sender.id, event.message.text).indexOf("🙉") != -1){
+        //here in respond could toggle if send and image or not! cause respond called here
+        messenger_send_pic(event.sender.id, "http://orig06.deviantart.net/c004/f/2017/162/1/1/monkeyembarras_by_chibixi-dbcaxg1.gif");
+    } else if(response.respond(event.sender.id, event.message.text).indexOf("🙊") != -1  && response.respond(event.sender.id, event.message.text).indexOf("😞") != -1 ){
+        messenger_send_pic(event.sender.id, "http://orig08.deviantart.net/f494/f/2017/162/7/2/monkeyconfused_by_chibixi-dbcaxg9.gif");
+    }else if(response.respond(event.sender.id, event.message.text).indexOf("🙊") != -1){
+        messenger_send_pic(event.sender.id, "http://orig13.deviantart.net/4654/f/2017/162/e/7/monkeyquestion_by_chibixi-dbcaxge.gif");
+    }else if(response.respond(event.sender.id, event.message.text).indexOf("🐒") != -1){
+        messenger_send_pic(event.sender.id, "http://orig02.deviantart.net/d9ad/f/2017/162/7/a/monkeybye_by_chibixi-dbcaxfv.gif");
+    }else if(response.respond(event.sender.id, event.message.text).indexOf("🐵") != -1 && response.respond(event.sender.id, event.message.text).indexOf("😀") != -1 ){
         messenger_send_pic(event.sender.id, "http://orig12.deviantart.net/08c8/f/2017/161/b/f/monkeyassets_by_chibixi-dbcagez.gif");
+    } else if(response.respond(event.sender.id, event.message.text).indexOf("condom") != -1){
+        messenger_send_pic(event.sender.id, "http://orig03.deviantart.net/20bb/f/2017/162/4/5/monkeybanana_by_chibixi-dbcaxfr.gif");
     }
 }
 

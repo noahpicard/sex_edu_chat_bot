@@ -148,7 +148,7 @@ var searchAnswers = function (userId, text) {
 	if (closestQuestion === '') {
 		closestQuestion = getClosestString(questions, text);
 		if (closestQuestion === '') {
-			return '🙊\nI\'m sorry, I didn\'t understand that.\nCould you ask in another way?';
+			return '🙊\nI\'m sorry, I didn\'t understand that.😞\nCould you ask in another way?';
 		}
 		return '🙊\nI\'m sorry, I didn\'t quite understand that.\nDid you mean:\n"' + closestQuestion +'"';
 	}
@@ -170,7 +170,7 @@ var respond = function (userId, text) {
 	text = cleanText(text);
 
 	if (checkGreetings(text)) {
-		return "🐵 I'm Madeliene!\nGreat to meet you!\n\nWhat are you interested in?\n1. I want to learn about sex\n2. I want to get hygiene products\n3. I want to find resources near me"
+		return "🐵 I'm Madeliene!😀\nGreat to meet you!\n\nWhat are you interested in?\n1. I want to learn about sex\n2. I want to get hygiene products\n3. I want to find resources near me"
 	}
 	if (checkLocalResources(text)) {
 		return text.substring(5, text.length);
