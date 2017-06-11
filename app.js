@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var secret = require('./secret');
+var response = require('./response');
 var app = express();
 var port = 8000;
 
@@ -28,7 +29,7 @@ app.post('/messenger', function (req, res) {
 
 var messenger_receive = function (event) {
   console.log(event);
-  messenger_send(event.sender.id, event.message.text);
+  messenger_send(event.sender.id, response.respond(event.sender.id, event.message.text));
 }
 
 var messenger_send = function (userId, text) {
