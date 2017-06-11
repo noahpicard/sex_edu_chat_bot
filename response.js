@@ -1,13 +1,12 @@
 var answers = require('./answers');
 var stopwords = require('./stopwords');
-
+// var storage = require('./storage');
 
 var makeDictionary = function(d) {
 	var final = {}
-	for (i in d) {
-		var item = d[i];
-		var key = item[0].toLowerCase();
-		var val = item[1];
+	for (item in d) {
+		var key = item.toLowerCase();
+		var val = d[item];
 		final[key] = val;
 	}
 	return final
@@ -130,7 +129,7 @@ var searchAnswers = function (userId, text) {
 	console.log(answerDict[closestQuestion]);
 	
 	var responseArr = [
-		'"'+closestQuestion+'":\n\n🐵',
+		'"'+closestQuestion+'"\n\n🐵',
 		getQuestionPreComment(),
 		answerDict[closestQuestion],
 		getQuestionPostComment()
