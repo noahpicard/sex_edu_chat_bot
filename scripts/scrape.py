@@ -53,3 +53,4 @@ for link in links:
 	pickle.dump(mapping, open('answers.p', 'w'))
 	i += 1
 	print i
+json.dump(mapping, open('../answers.json', 'w'), indent=2, sort_keys=True)
