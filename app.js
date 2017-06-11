@@ -29,7 +29,7 @@ app.post('/messenger', function (req, res) {
       messenger_receive(event);
     } else if(event.postback){
       if(event.postback.payload == "SEX"){
-      	messenger_send(event.sender.id, "Ask me a question then!");
+      	messenger_send(event.sender.id, "🐵 Ask me a question then!\n\n" + response.getSampleQuestions() + '\n\n\nOr ask for a defintion!\n\n' + response.getSampleDefinitions() + '\n\nYou can ask me for example questions anytime! Just say: "Show me random questions"!');
       } else if(event.postback.payload == "PRODUCT"){
       	messenger_send_product_quiz(event.sender.id, "hI");
       } else {
