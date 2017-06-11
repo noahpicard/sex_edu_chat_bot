@@ -48,7 +48,7 @@ var countDict = function(arr) {
 }
 
 var checkFave = function(text) {
-	return hasWords(text, ["you"]) && hasWords(text, ["best", "fav", "fave", "favorite", "awesome", "smart"]);
+	return hasWords(text, ["you", "you're"]) && hasWords(text, ["best", "fav", "fave", "favorite", "awesome", "smart", "great", "wonderful"]);
 };
 
 var checkThanks = function(text) {
@@ -67,6 +67,10 @@ var checkAgreement = function(text) {
 	return hasWords(text, ["yes", "yep", "okay"]);
 };
 
+var checkRandomQuestion = function(text) {
+	return hasWords(text, ["random"]) && hasWords(text, ["question", "questions"]);
+};
+
 var checkLocalResources = function(text) {
 	return hasWords(text, ["local"]);
 };
@@ -77,6 +81,8 @@ var stringDistance = function(str1, str2) {
 	str2 = removePunc(str2);
 	var arr1 = str1.split(" ");
 	var arr2 = str2.split(" ");
+	console.log(arr1);
+	console.log(arr2);
 	var matches = 0;
 	var dict1 = countDict(arr1);
 	var dict2 = countDict(arr2);
@@ -86,27 +92,29 @@ var stringDistance = function(str1, str2) {
 			matches += Math.min(dict1[key], dict2[key]);
 		}
 	}
-	matches = matches/(arr1.length+arr2.length);
+
+	matches = matches/(1+(Math.abs(arr1.length-arr2.length)));
 	return matches;
 }
 
-var getCloserString = function(closestStr, newStr, text) {
-	closestStr = closestStr.toLowerCase();
-	newStr = newStr.toLowerCase();
-
-	var closestScore = stringDistance(closestStr, text);
-	var newScore = stringDistance(newStr, text);
-	if (newScore > closestScore) {
-		return newStr;
-	}
-	return closestStr;
-}
 
 var getClosestString = function(questions, text) {
 	var closestQuestion = '';
+	var closestScore = 0;
 	for (i in questions) {
 		var question = questions[i];
-		closestQuestion = getCloserString(closestQuestion, question, text);
+		question = question.toLowerCase();
+
+		var scoreQuestion = stopwords.removeStopWords(question).join(' ')
+		if (text.length != stopwords.removeStopWords(text).join(' ').length) {
+			scoreQuestion = question;
+		}
+
+		var newScore = stringDistance(scoreQuestion, text);
+		if (newScore > closestScore) {
+			closestQuestion = question;
+			closestScore = newScore;
+		}
 	}
 	return closestQuestion;
 }
@@ -133,13 +141,44 @@ var getQuestionPostComment = function() {
 		"",
 		"Make sense?",
 		"\nAnything else you want to know?",
-		"\nAny questions?",
+		"\nAny other questions?",
 		"That's pretty much it!",
 		"I hope that makes sense!",
 		"I hope that helps!"
 	];
 	var comment = commentArray[Math.floor(Math.random() * commentArray.length)];
 	return comment;
+}
+
+var getDefinitionPreComment = function() {
+	var commentArray = [
+		"",
+		"",
+		"",
+		"Let's investigate..",
+		"Hmm... Let me see.",
+		"Okay, let's see.."
+	];
+	var comment = commentArray[Math.floor(Math.random() * commentArray.length)];
+	return comment;
+}
+
+var getDefinitionPostComment = function() {
+	var commentArray = [
+		"",
+		"",
+		"",
+		"\nAnything else you want to know?",
+		"\nDoes that help your understanding?",
+		"I hope that makes sense!",
+		"I hope that helps!"
+	];
+	var comment = commentArray[Math.floor(Math.random() * commentArray.length)];
+	return comment;
+}
+
+var isQuestion = function(text) {
+	return text.includes("?");
 }
 
 var searchAnswers = function (userId, text) {
@@ -163,7 +202,38 @@ var searchAnswers = function (userId, text) {
 		getQuestionPostComment()
 	];
 
+	if (!isQuestion(closestQuestion)) {
+		responseArr = [
+			'"'+closestQuestion+'"\n\n🐵',
+			getDefinitionPreComment(),
+			answerDict[closestQuestion],
+			getDefinitionPostComment()
+		];
+	}
+	
+
 	return responseArr.join(" ");
+}
+
+
+var getSampleQuestions = function() {
+	var questions = Object.keys(answerDict);
+	questions = questions.filter(function(question) { return question.includes("?") });
+	var arr = ['Some examples of questions are:']
+	for (i in [1,2,3]) {
+		arr.push('"'+questions[Math.floor(Math.random() * questions.length)]+'"');
+	}
+	return arr.join("\n");
+}
+
+var getSampleDefinitions = function() {
+	var questions = Object.keys(answerDict);
+	questions = questions.filter(function(question) { return (!question.includes("?")) });
+	var arr = ['Some examples of defintions are:']
+	for (i in [1,2,3]) {
+		arr.push('"'+questions[Math.floor(Math.random() * questions.length)]+'"');
+	}
+	return arr.join("\n");
 }
 
 var respond = function (userId, text) {
@@ -182,14 +252,19 @@ var respond = function (userId, text) {
 		return "🙈 You're welcome! Happy to help! 😀"
 	}
 	if (checkAgreement(text)) {
-		return "🙉 That's great to hear!"
+		return "🙈 Awesome! That's great to hear!"
 	}
 	if (checkParting(text)) {
 		return "🐒 See you later!\nCome by any time you have questions!"
+	}
+	if (checkRandomQuestion(text)) {
+		return "🐵 Finding random questions... Here they are!\n\n" + getSampleQuestions() + "\n\n" + getSampleDefinitions()
 	}
 	return searchAnswers(userId, text);
 }
 
 module.exports = {
-	'respond': respond
+	'respond': respond,
+	'getSampleQuestions': getSampleQuestions,
+	'getSampleDefinitions': getSampleDefinitions
 }
