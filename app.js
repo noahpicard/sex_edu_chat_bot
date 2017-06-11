@@ -139,14 +139,28 @@ var messenger_receive = function (event) {
         getLocalResources(event);
         //text = getLocalResources(event);
     }
-	if(response.respond(event.sender.id, event.message.text).indexOf("🐵 I'm Madeliene!") != -1){
-		messenger_send_quiz(event.sender.id, "hI");
-	} 
     googleTranslate.translate(text, 'en', function(err, translation) {
-    	  var reply = response.respond(event.sender.id, translation.translatedText);
-  	  googleTranslate.translate(reply, translation.detectedSourceLanguage, function(err, translation) {
-  		  messenger_send(event.sender.id, translation.translatedText);
-  	  });
+		var reply = response.respond(event.sender.id, translation.translatedText);
+        if(reply.indexOf("🐵 I'm Madeliene!") != -1) {
+            //messenger_send_quiz(event.sender.id, "hI");
+			var arr = [reply];
+			arr.push("What do you want to do next?");
+            arr.push("Learn more");
+            arr.push("LEARN");
+            arr.push("Get hygiene products");
+            arr.push("HYGIENE");
+            arr.push("Find local resources");
+            arr.push("LOCAL");
+            googleTranslate.translate(arr, translation.detectedSourceLanguage, function(err, translations) {
+                messenger_send(event.sender.id, translations[0].translatedText);
+                translations.shift();
+                messenger_send_quiz(event.sender.id, "hI", translations);
+            });
+        } else {
+            googleTranslate.translate(reply, translation.detectedSourceLanguage, function(err, translation) {
+                messenger_send(event.sender.id, translation.translatedText);
+            });
+        }
     });
     
     //messenger_send(event.sender.id, response.respond(event.sender.id, event.message.text));
@@ -245,7 +259,7 @@ var messenger_send = function (userId, text) {
     // messenger_send(event.sender.id, response.respond(event.sender.id, event.message.text));
 
 }
-var messenger_send_quiz = function (userId, text) {
+var messenger_send_quiz = function (userId, text, arr) {
 	text_portions = [];
 	while (text.length > 0) {
 		var portion = text.substr(0, 637);
@@ -272,21 +286,21 @@ var messenger_send_quiz = function (userId, text) {
 			  "type":"template",
 			  "payload":{
 				"template_type":"button",
-				"text":"What do you want to do next?",
+				"text": arr[0].translatedText,
 				"buttons":[
 				  
 				  {
 					"type":"postback",
-					"title":"Learn about sex",
-					"payload":"SEX"
+					"title": arr[1].translatedText,
+					"payload": arr[2].translatedText
 				  },{
 					"type":"postback",
-					"title":"Get hygiene products",
-					"payload":"PRODUCT"
+					"title": arr[3].translatedText,
+					"payload": arr[4].translatedText
 				  },{
 					"type":"postback",
-					"title":"Talk to a real person",
-					"payload":"PERSON"
+					"title": arr[5].translatedText,
+					"payload": arr[6].translatedText
 				  }
 				]
 			  }
