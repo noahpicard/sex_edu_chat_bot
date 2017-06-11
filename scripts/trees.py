@@ -26,17 +26,31 @@ greeting_tree = {
       ("🐵 Great, try asking me a question!\nI can answer something like 'What is a STD?'\nYou can also discover new questions by saying 'Show me random questions!'\nGo for it!", "search"): []
     }),
     ("Assessment", {
-      ("🐵 Ok! I'm going to ask you a few questions to see what product is best for you. Do you like to exercise during your period?", "buttons"): [
+      ("🐵 Ok! I'm going to ask you a few questions to see what product is best for you. I know it's hard to figure out which one works best for you! Do you like to exercise during your period?", "buttons"): [
         ("Yes", {
-          ("Great! You will be most comfortable going with tampons", "search"): []
+          ("Great! 🙉 You will be most comfortable going with tampons since they make it easier for you to move around, especially if you want to swim.", "search"): []
         }),
         ("No", {
-          ("No problem! You will be most comfortable going with pads", "search"): []
+          ("And how would you describe your menstrual flow? 🙊 I know it's scary to have a lot of blood come out of your body at once.", "buttons"): [
+            ("Heavy", {
+              ("Finally, how comfortable are you with your body? 🙊", "buttons"): [
+                ("Not comfortable", {
+                  ("No problem! 🙉 Your best choice is to go with pads! They are super easy to put on and also can hold a lot of blood.", "search"): []
+                }),
+                ("Comfortable", {
+                  ("Great! 🙉 Your best choice is to go with tampons! They make it easy for you to move around after you learn how to put them on!", "search"): []
+                })
+              ]
+            }),
+            ("Light", {
+              ("Great! 🙉 You will be most comfortable going with tampons! They can catch a lot of blood and stay in very well!", "search"): []
+            })
+          ]
         })
       ]
     }),
     ("Local resources", {
-        ("What specifically are you looking for?", "image_search"): []
+        ("What specifically are you looking for?🙊", "image_search"): []
     })
   ]
 }
