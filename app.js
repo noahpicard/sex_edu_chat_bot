@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var response = require('./response');
 var app = express();
-var port = 8000;
+var port = process.env.PORT || 8000;
 var verify_token = process.env.VERIFY || require('./secret').verify_token;
 var access_token = process.env.ACCESS || require('./secret').access_token;
 
