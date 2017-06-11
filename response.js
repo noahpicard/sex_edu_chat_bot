@@ -176,8 +176,8 @@ var respond = function (userId, text) {
 	if (checkAgreement(text)) {
 		return "🙉 That's great to hear!"
 	}
-	if (checkPartings(text)) {
-		return "🐒 See you later! Come by any time you have questions!"
+	if (checkParting(text)) {
+		return "🐒 See you later!\nCome by any time you have questions!"
 	}
 	return searchAnswers(userId, text);
 }
