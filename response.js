@@ -16,7 +16,7 @@ var cleanText = function (text) {
 var respond = function (userId, text) {
 	text = cleanText(text);
 	if (checkFave(text)) {
-		return "Aww thanks!"
+		return "🐵 Aww thanks!😄"
 	}
 	if (checkGreetings(text)) {
 		return "🐵 I'm Madeliene!\nGreat to meet you!\n\nWhat are you interested in?\n1. I want to learn about sex\n2. I want to get hygiene products\n3. I want to talk to a real person"
