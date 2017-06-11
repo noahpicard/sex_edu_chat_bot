@@ -1,10 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
-var secret = require('./secret');
 var response = require('./response');
 var app = express();
 var port = 8000;
+var secret = require('./secret') || {
+	'verify_token': process.env.VERIFY,
+	'access_token': process.env.ACCESS
+};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
