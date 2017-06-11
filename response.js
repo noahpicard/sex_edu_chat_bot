@@ -1,5 +1,5 @@
 var answers = require('./answers');
-var storage = require('./storage');
+// var storage = require('./storage');
 
 var checkFave = function (text) {
 	return text.includes("you") && text.includes("fav")
