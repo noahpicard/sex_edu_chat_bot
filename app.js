@@ -30,7 +30,6 @@ app.post('/messenger', function (req, res) {
 
 var messenger_receive = function (event) {
   console.log(event);
-  
   messenger_send(event.sender.id, response.respond(event.sender.id, event.message.text));
 }
 
