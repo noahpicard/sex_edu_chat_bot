@@ -14,6 +14,7 @@ var cleanText = function (text) {
 }
 
 var respond = function (userId, text) {
+	/*
 	text = cleanText(text);
 	if (checkFave(text)) {
 		return "Aww thanks!"
@@ -25,6 +26,8 @@ var respond = function (userId, text) {
 		return answers[15][1]; // random answer
 	}
 	return "I'm sorry, I didn't grok that. Could you rephrase?";
+	*/
+	return text;
 };
 
 module.exports = {
