@@ -59,9 +59,9 @@ var receive = function (user, text, oid, cb) {
           });
         } else {
           cb('Couldn\'t find a picture of that--sorry!', [], [], null, null);
-		  getLocalResources("syria", function(list) {
-			  cb('But you can ask some local NGOs in your camp: ' + list, [], [], null, null);
-		  });
+          getLocalResources("syria", function(list) {
+        cb('But you can ask some local NGOs in your camp: ' + list, [], [], null, null);
+      });
         }
       } else if (prompt[1] == 'search') {
         trigger_search(user, text, cb);
