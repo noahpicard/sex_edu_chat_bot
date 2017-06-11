@@ -70,7 +70,7 @@ greeting_tree = {
             ("Jordan", {
               ("🐵 Okay, great! And what settlement are you in?", "buttons"): [
                 ("Zaatari", {
-                  ("What specifically are you looking for?🙊", "image_search"): []
+                  ("Okay! Some of the organizations in your area are:\nReproductive Health (UNFPA), Gender-Based Violence (UNHCR), Core Relief Items (CRIs) (PWJ), Health (WHO). Try reaching out to these groups!\n\nWhat specifically are you looking for?🙊", "image_search"): []
                 }),
                 ("Mrajeeb Al Fhood", {
                   ("What specifically are you looking for?🙊", "image_search"): []
