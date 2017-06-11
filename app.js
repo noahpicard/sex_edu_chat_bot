@@ -164,9 +164,8 @@ function messenger_send_pic(userId, imageURL, cb) {
 }
 
 function addMonkeyIfPossible(event, translated, cb) {
-    if (translated.indexOf("🐵") != -1 && translated.indexOf("😀") != -1){
-      // do nothing on greeting message
-    } else if (translated.indexOf("🙈") != -1) {
+  console.log("OH " + translated);
+   if (translated.indexOf("🙈") != -1) {
         //here in respond could toggle if send and image or not! cause respond called here
         messenger_send_pic(event.sender.id, "http://orig14.deviantart.net/49d9/f/2017/161/2/5/monkeyvictor_by_chibixi-dbcal2t.gif", cb);
     } else if (translated.indexOf("🙉") != -1 && translated.indexOf("😀") != -1) {

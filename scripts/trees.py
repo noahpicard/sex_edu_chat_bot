@@ -21,9 +21,9 @@ import json
 ################################
 
 greeting_tree = {
-  ("🐵 I'm Madeleine!\nGreat to meet you!\n\nI'm an expert on reproductive health. I can help you by answering questions, giving an assessment, or connecting you with local resources. What would you like to do?", "buttons"): [
+  ("🐵 I'm Madeleine! 😀 \nGreat to meet you!\n\nI know things might be confusing for you or scary, but I know quite a lot about reproductive health so don't worry! I can help you by answering questions, giving an assessment, or connecting you with local resources! I'm also multi-lingual! What would you like to do?", "buttons"): [
     ("Question", {
-      ("Ask me a question then!", "search"): []
+      ("Ask me a question then! I can answer something like 'What is a STD?' for you!", "search"): []
     }),
     ("Assessment", {
       ("Ok! I'm going to ask you a few questions to see what product is best for you. Do you like to exercise during your period?", "buttons"): [

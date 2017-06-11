@@ -103,7 +103,7 @@ var searchAnswers = function (userId, text) {
 	if (closestQuestion === '') {
 		closestQuestion = getClosestString(questions, text);
 		if (closestQuestion === '') {
-			return '🙊\nI\'m sorry, I didn\'t understand that.\nCould you ask in another way?';
+			return '🙊\nI\'m sorry, I didn\'t understand that.😞\nCould you ask in another way?';
 		}
 		return '🙊\nI\'m sorry, I didn\'t quite understand that.\nDid you mean:\n"' + closestQuestion +'"';
 	}
