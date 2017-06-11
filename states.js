@@ -63,6 +63,8 @@ var receive = function (user, text, oid, cb) {
 				});
       } else if (prompt[1] == 'search') {
         trigger_search(user, text, cb);
+      } else {
+        trigger_search(user, text, cb);
       }
     }
   }

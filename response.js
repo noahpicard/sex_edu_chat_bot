@@ -1,6 +1,6 @@
 var answers = require('./answers');
 var stopwords = require('./stopwords');
-var texttools = require('./texttools');
+// var storage = require('./storage');
 
 var makeDictionary = function(d) {
 	var final = {}
@@ -14,6 +14,27 @@ var makeDictionary = function(d) {
 
 var answerDict = makeDictionary(answers);
 
+var removePunc = function(text) {
+	return text.replace(/[.,\/#!?$%\^&\*;:{}=\-_`~()]/g,"");
+}
+
+var hasWords = function(text, wordList) {
+	var arr = text.split(" ");
+	for (i in wordList) {
+		var word = wordList[i];
+		if (arr.indexOf(word) !== -1) {
+			return true;
+		}
+	}
+	return false;
+}
+
+var cleanText = function(text) {
+	text = text.toLowerCase();
+	text = removePunc(text);
+	return text;
+}
+
 var countDict = function(arr) {
 	var dict = {};
 	for (i in arr) {
@@ -26,10 +47,38 @@ var countDict = function(arr) {
 	return dict;
 }
 
+var checkFave = function(text) {
+	return hasWords(text, ["you", "you're"]) && hasWords(text, ["best", "fav", "fave", "favorite", "awesome", "smart", "great", "wonderful"]);
+};
+
+var checkThanks = function(text) {
+	return hasWords(text, ["thank", "thanks"]);
+};
+
+var checkParting = function(text) {
+	return hasWords(text, ["goodbye", "bye", "byebye"]);
+};
+
+var checkGreetings = function(text) {
+	return hasWords(text, ["hi", "hello", "hey"]);
+};
+
+var checkAgreement = function(text) {
+	return hasWords(text, ["yes", "yep", "okay"]);
+};
+
+var checkRandomQuestion = function(text) {
+	return hasWords(text, ["random"]) && hasWords(text, ["question", "questions"]);
+};
+
+var checkLocalResources = function(text) {
+	return hasWords(text, ["local"]);
+};
+
 var stringDistance = function(str1, str2) {
 
-	str1 = texttools.removePunc(str1);
-	str2 = texttools.removePunc(str2);
+	str1 = removePunc(str1);
+	str2 = removePunc(str2);
 	var arr1 = str1.split(" ");
 	var arr2 = str2.split(" ");
 	console.log(arr1);
@@ -166,6 +215,7 @@ var searchAnswers = function (userId, text) {
 	return responseArr.join(" ");
 }
 
+
 var getSampleQuestions = function() {
 	var questions = Object.keys(answerDict);
 	questions = questions.filter(function(question) { return question.includes("?") });
@@ -186,29 +236,35 @@ var getSampleDefinitions = function() {
 	return arr.join("\n");
 }
 
-var respond = function (user, text, cb) {
-	text = texttools.cleanText(text);
+var respond = function (userId, text) {
+	text = cleanText(text);
 
-	if (texttools.checkGreetings(text)) {
-		cb(null);
-	} else if (texttools.checkLocalResources(text)) {
-		cb(text.substring(5, text.length));
-	} else if (texttools.checkFave(text)) {
-		cb("🙉 Aww golly gee! Thanks! 😀");
-	} else if (texttools.checkThanks(text)) {
-		cb("🙈 You're welcome! Happy to help! 😀");
-	} else if (texttools.checkAgreement(text)) {
-		cb("🙈 Awesome! That's great to hear!");
-	} else if (texttools.checkParting(text)) {
-		cb("🐒 See you later!\nCome by any time you have questions!");
-	} else if (texttools.checkRandomQuestion(text)) {
-		cb("🐵 Finding random questions... Here they are!\n\n" + getSampleQuestions() + "\n\n" + getSampleDefinitions());
-	} else {
-		cb(searchAnswers(user, text));
+	if (checkGreetings(text)) {
+		return "🐵 I'm Madeliene!😀\nGreat to meet you!\n\nWhat are you interested in?\n1. I want to learn about sex\n2. I want to get hygiene products\n3. I want to find resources near me"
 	}
-
+	if (checkLocalResources(text)) {
+		return text.substring(5, text.length);
+	}
+	if (checkFave(text)) {
+		return "🙉 Aww golly gee! Thanks! 😀"
+	}
+	if (checkThanks(text)) {
+		return "🙈 You're welcome! Happy to help! 😀"
+	}
+	if (checkAgreement(text)) {
+		return "🙈 Awesome! That's great to hear!"
+	}
+	if (checkParting(text)) {
+		return "🐒 See you later!\nCome by any time you have questions!"
+	}
+	if (checkRandomQuestion(text)) {
+		return "🐵 Finding random questions... Here they are!\n\n" + getSampleQuestions() + "\n\n" + getSampleDefinitions()
+	}
+	return searchAnswers(userId, text);
 }
 
 module.exports = {
-	'respond': respond
+	'respond': respond,
+	'getSampleQuestions': getSampleQuestions,
+	'getSampleDefinitions': getSampleDefinitions
 }
