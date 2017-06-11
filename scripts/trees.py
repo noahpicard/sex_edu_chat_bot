@@ -31,7 +31,21 @@ greeting_tree = {
           ("Great! You will be most comfortable going with tampons", "search"): []
         }),
         ("No", {
-          ("No problem! You will be most comfortable going with pads", "search"): []
+          ("And how would you describe your menstrual flow?", "buttons"): [
+            ("Heavy", {
+              ("Finally, how comfortable are you with your body?", "buttons"): [
+                ("Not comfortable", {
+                  ("No problem! Your best choice is to go with pads", "search"): []
+                }),
+                ("Comfortable", {
+                  ("Great! Your best choice is to go with tampons", "search"): []
+                })
+              ]
+            }),
+            ("Light", {
+              ("Great! You will be most comfortable going with tampons", "search"): []
+            })
+          ]
         })
       ]
     }),
