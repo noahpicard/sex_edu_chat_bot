@@ -12,15 +12,27 @@
     "greeting-p3"
   ], 
   "greeting-o3": [
-    "", 
+    "Yes", 
     "greeting-p4"
   ], 
   "greeting-o4": [
-    "Yes", 
+    "No", 
     "greeting-p5"
   ], 
   "greeting-o5": [
-    "No", 
+    "Heavy", 
     "greeting-p6"
+  ], 
+  "greeting-o6": [
+    "Light", 
+    "greeting-p7"
+  ], 
+  "greeting-o7": [
+    "Not comfortable", 
+    "greeting-p8"
+  ], 
+  "greeting-o8": [
+    "Comfortable", 
+    "greeting-p9"
   ]
 }
