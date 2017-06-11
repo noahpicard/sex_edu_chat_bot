@@ -28,22 +28,22 @@ greeting_tree = {
     ("My hygeine product?", {
       ("🐵 Ok! I'm going to ask you a few questions to see what product is best for you. I know it's hard to figure out which one works best for you! Do you like to exercise during your period?", "buttons"): [
         ("Yes", {
-          ("Great! 🙉 You will be most comfortable going with tampons since they make it easier for you to move around, especially if you want to swim.", "search"): []
+          ("Great! 🙉 You will be most comfortable going with tampons since they make it easier for you to move around, especially if you want to swim. Check out Local Resources to find out where you can get tampons near you!", "search"): []
         }),
         ("No", {
           ("And how would you describe your menstrual flow? 🙊 I know it's scary to have a lot of blood come out of your body at once.", "buttons"): [
             ("Heavy", {
               ("Finally, how comfortable are you with your body? 🙊", "buttons"): [
                 ("Not comfortable", {
-                  ("No problem! 🙉 Your best choice is to go with pads! They are super easy to put on and also can hold a lot of blood.", "search"): []
+                  ("No problem! 🙉 Your best choice is to go with pads! They are super easy to put on and also can hold a lot of blood. Check out Local Resources to find out where you can get pads near you!", "search"): []
                 }),
                 ("Comfortable", {
-                  ("Great! 🙉 Your best choice is to go with tampons! They make it easy for you to move around after you learn how to put them on!", "search"): []
+                  ("Great! 🙉 Your best choice is to go with tampons! They make it easy for you to move around after you learn how to put them on! Check out Local Resources to find out where you can get tampons near you.", "search"): []
                 })
               ]
             }),
             ("Light", {
-              ("Great! 🙉 You will be most comfortable going with panty liners! They can catch a lot of blood and stay very well!", "search"): []
+              ("Great! 🙉 You will be most comfortable going with panty liners! They can catch a lot of blood and stay very well! Check out Local Resources to find out where you can get panty liners near you.", "search"): []
             })
           ]
         })
