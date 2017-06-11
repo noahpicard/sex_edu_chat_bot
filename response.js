@@ -51,6 +51,10 @@ var checkFave = function(text) {
 	return hasWords(text, ["you"]) && hasWords(text, ["best", "fav", "fave", "favorite", "awesome", "smart"]);
 };
 
+var checkThanks = function(text) {
+	return hasWords(text, ["thank", "thanks"]);
+};
+
 var checkGreetings = function(text) {
 	return hasWords(text, ["hi", "hello", "hey"]);
 };
@@ -164,7 +168,10 @@ var respond = function (userId, text) {
 		return text.substring(5, text.length);
 	}
 	if (checkFave(text)) {
-		return "🙉 Aww golly gee! Thanks!"
+		return "🙉 Aww golly gee! Thanks! 😀"
+	}
+	if (checkThanks(text)) {
+		return "🙈 You're welcome! Happy to help! 😀"
 	}
 	if (checkGreetings(text)) {
 		return "🐵 I'm Madeliene!\nGreat to meet you!\n\nWhat are you interested in?\n1. I want to learn about sex\n2. I want to get hygiene products\n3. I want to find resources near me"
