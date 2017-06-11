@@ -40,7 +40,7 @@ var countDict = function(arr) {
 	for (i in arr) {
 		var val = arr[i];
 		if (!(val in dict)) {
-			dict[val] = 0; 
+			dict[val] = 0;
 		}
 		dict[val] += 1;
 	}
@@ -65,6 +65,10 @@ var checkGreetings = function(text) {
 
 var checkAgreement = function(text) {
 	return hasWords(text, ["yes", "yep", "okay"]);
+};
+
+var checkLocalResources = function(text) {
+	return hasWords(text, ["local"]);
 };
 
 var stringDistance = function(str1, str2) {
@@ -151,7 +155,7 @@ var searchAnswers = function (userId, text) {
 	console.log("RESPONSE:");
 	console.log(closestQuestion);
 	console.log(answerDict[closestQuestion]);
-	
+
 	var responseArr = [
 		'"'+closestQuestion+'"\n\n🐵',
 		getQuestionPreComment(),
@@ -164,8 +168,12 @@ var searchAnswers = function (userId, text) {
 
 var respond = function (userId, text) {
 	text = cleanText(text);
+
 	if (checkGreetings(text)) {
 		return "🐵 I'm Madeliene!\nGreat to meet you!\n\nWhat are you interested in?\n1. I want to learn about sex\n2. I want to get hygiene products\n3. I want to find resources near me"
+	}
+	if (checkLocalResources(text)) {
+		return text.substring(5, text.length);
 	}
 	if (checkFave(text)) {
 		return "🙉 Aww golly gee! Thanks! 😀"
