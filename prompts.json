@@ -1,6 +1,6 @@
 {
   "greeting-p0": [
-    "\ud83d\udc35 I'm Madeleine! \ud83d\ude00 \nGreat to meet you!\n\nI know things might be confusing for you or scary, but I know quite a lot about reproductive health so don't worry! I can help you by answering questions, giving an assessment, or connecting you with local resources! I'm also multi-lingual! What would you like to do?", 
+    "\ud83d\udc35 I'm Madeleine! \ud83d\ude00 \nGreat to meet you!\n\nI know things might be confusing for you or scary, but I know quite a lot about reproductive health so don't worry! I can help you by answering questions, giving hygiene product recommendations, or connecting you with local resources! I'm also multi-lingual! What would you like to do?", 
     "buttons", 
     [
       "greeting-o0", 
@@ -13,53 +13,91 @@
     "search", 
     []
   ], 
-  "greeting-p2": [
-    "\ud83d\udc35 Ok! I'm going to ask you a few questions to see what product is best for you. I know it's hard to figure out which one works best for you! Do you like to exercise during your period?", 
-    "buttons", 
-    [
-      "greeting-o3", 
-      "greeting-o4"
-    ]
-  ], 
-  "greeting-p3": [
-    "What specifically are you looking for?\ud83d\ude4a", 
-    "image_search", 
-    []
-  ], 
-  "greeting-p4": [
+  "greeting-p10": [
     "Great! \ud83d\ude49 You will be most comfortable going with tampons since they make it easier for you to move around, especially if you want to swim.", 
     "search", 
     []
   ], 
-  "greeting-p5": [
+  "greeting-p11": [
     "And how would you describe your menstrual flow? \ud83d\ude4a I know it's scary to have a lot of blood come out of your body at once.", 
     "buttons", 
     [
-      "greeting-o5", 
-      "greeting-o6"
+      "greeting-o11", 
+      "greeting-o12"
     ]
   ], 
-  "greeting-p6": [
+  "greeting-p12": [
     "Finally, how comfortable are you with your body? \ud83d\ude4a", 
     "buttons", 
     [
-      "greeting-o7", 
-      "greeting-o8"
+      "greeting-o13", 
+      "greeting-o14"
     ]
   ], 
-  "greeting-p7": [
-    "Great! \ud83d\ude49 You will be most comfortable going with tampons! They can catch a lot of blood and stay in very well!", 
+  "greeting-p13": [
+    "Great! \ud83d\ude49 You will be most comfortable going with panty liners! They can catch a lot of blood and stay very well!", 
     "search", 
     []
   ], 
-  "greeting-p8": [
+  "greeting-p14": [
     "No problem! \ud83d\ude49 Your best choice is to go with pads! They are super easy to put on and also can hold a lot of blood.", 
     "search", 
     []
   ], 
-  "greeting-p9": [
+  "greeting-p15": [
     "Great! \ud83d\ude49 Your best choice is to go with tampons! They make it easy for you to move around after you learn how to put them on!", 
     "search", 
+    []
+  ], 
+  "greeting-p2": [
+    "\ud83d\udc35 Ok! I'm going to ask you a few questions to see what product is best for you. I know it's hard to figure out which one works best for you! Do you like to exercise during your period?", 
+    "buttons", 
+    [
+      "greeting-o9", 
+      "greeting-o10"
+    ]
+  ], 
+  "greeting-p3": [
+    "\ud83d\udc35 Let's check out what resources are available in your local area! I'm going to ask you a few questions. First, what country are you in?", 
+    "buttons", 
+    [
+      "greeting-o3", 
+      "greeting-o4", 
+      "greeting-o5"
+    ]
+  ], 
+  "greeting-p4": [
+    "\ud83d\udc35 Okay, great! And what settlement are you in?", 
+    "buttons", 
+    [
+      "greeting-o6", 
+      "greeting-o7", 
+      "greeting-o8"
+    ]
+  ], 
+  "greeting-p5": [
+    "What specifically are you looking for?\ud83d\ude4a", 
+    "image_search", 
+    []
+  ], 
+  "greeting-p6": [
+    "What specifically are you looking for?\ud83d\ude4a", 
+    "image_search", 
+    []
+  ], 
+  "greeting-p7": [
+    "What specifically are you looking for?\ud83d\ude4a", 
+    "image_search", 
+    []
+  ], 
+  "greeting-p8": [
+    "What specifically are you looking for?\ud83d\ude4a", 
+    "image_search", 
+    []
+  ], 
+  "greeting-p9": [
+    "What specifically are you looking for?\ud83d\ude4a", 
+    "image_search", 
     []
   ]
 }

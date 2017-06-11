@@ -50,7 +50,33 @@ greeting_tree = {
       ]
     }),
     ("Local resources", {
-        ("What specifically are you looking for?🙊", "image_search"): []
+        ("🐵 Let's check out what resources are available in your local area! I'm going to ask you a few questions. First, what country are you in?", "buttons"): [
+            ("Jordan", {
+              ("🐵 Okay, great! And what settlement are you in?", "buttons"): [
+                ("Zaatari", {
+                  ("What specifically are you looking for?🙊", "image_search"): []
+                }),
+                ("Mrajeeb Al Fhood", {
+                  ("What specifically are you looking for?🙊", "image_search"): []
+                }),
+                ("Azraq", {
+                  ("What specifically are you looking for?🙊", "image_search"): []
+                })
+                #("Hadallat", {
+                #   ("What specifically are you looking for?🙊", "image_search"): []
+                #})
+                # ("Rukban", {
+                #   ("What specifically are you looking for?🙊", "image_search"): []
+                # })
+              ]
+            }),
+            ("Turkey", {
+              ("What specifically are you looking for?🙊", "image_search"): []
+            }),
+            ("Lebabnon", {
+              ("What specifically are you looking for?🙊", "image_search"): []
+            })
+        ]
     })
   ]
 }
