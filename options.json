@@ -8,7 +8,15 @@
     "greeting-p2"
   ], 
   "greeting-o2": [
-    "Talk to a real person", 
+    "Find local resources", 
     "greeting-p3"
+  ], 
+  "greeting-o3": [
+    "Yes", 
+    "greeting-p4"
+  ], 
+  "greeting-o4": [
+    "No", 
+    "greeting-p5"
   ]
 }

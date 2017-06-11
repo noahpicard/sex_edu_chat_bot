@@ -30,22 +30,27 @@ app.post('/messenger', function (req, res) {
     if (event.message && event.message.text) {
       var text = event.message.text;
       var user = event.sender.id;
-      messenger_receive(event, user, text);
+      messenger_receive(event, user, text, null);
     } else if (event.postback) {
-      var text = event.postback.payload;
+      var oid = event.postback.payload;
       var user = event.sender.id;
-      messenger_receive(event, user, text);
+      messenger_receive(event, user, '', oid);
     }
     res.sendStatus(200);
   }
 });
 
-var messenger_receive = function (event, user, text) {
+var messenger_receive = function (event, user, text, oid) {
   googleTranslate.translate(text, 'en', function(err, translation) {
-    states.receive(user, translation.translatedText, function (reply, buttons) {
+    states.receive(user, translation.translatedText, oid, function (reply, buttons, oids, target_language) {
       addMonkeyIfPossible(event, reply);
       buttons.push(reply);
-      googleTranslate.translate(buttons, translation.detectedSourceLanguage, function(err, translations) {
+      if (text == '') {
+        var language = target_language;
+      } else {
+        var language = translation.detectedSourceLanguage;
+      }
+      googleTranslate.translate(buttons, language, function(err, translations) {
         if (Array.isArray(translations)) {
           reply = translations.pop().translatedText;
           buttons = translations;
@@ -53,13 +58,13 @@ var messenger_receive = function (event, user, text) {
           reply = translations.translatedText;
           buttons = [];
         }
-        messenger_send_prompt(user, reply, buttons);
+        messenger_send_prompt(user, reply, buttons, oids, language);
       });
     });
   });
 }
 
-var messenger_send_prompt = function (user, text, arr) {
+var messenger_send_prompt = function (user, text, arr, oids, language) {
 	text_portions = [];
 	while (text.length > 0) {
 		var portion = text.substr(0, 637);
@@ -74,11 +79,11 @@ var messenger_send_prompt = function (user, text, arr) {
 		if (i >= text_portions.length) {
 			return;
 		} else if ((i == text_portions.length - 1) && arr.length > 0) {
-      var buttons = arr.map(function (item) {
+      var buttons = arr.map(function (item, index) {
         return {
             "type": "postback",
             "title": item.translatedText,
-            "payload": item.translatedText
+            "payload": language + oids[index]
           };
       });
       var options = {

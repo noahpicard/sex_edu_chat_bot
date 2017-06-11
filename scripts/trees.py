@@ -76,5 +76,5 @@ for name in trees.keys():
 
     prompts[pid] = prompt
 
-json.dump(prompts, open('../prompts.json', 'w'), indent=2, sort_keys=True)
-json.dump(options, open('../options.json', 'w'), indent=2, sort_keys=True)
+json.dump(prompts, open('prompts.json', 'w'), indent=2, sort_keys=True)
+json.dump(options, open('options.json', 'w'), indent=2, sort_keys=True)

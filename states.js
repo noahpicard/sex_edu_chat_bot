@@ -4,19 +4,24 @@ var options = require('./options');
 var response = require('./response');
 
 
-var receive = function (user, text, cb) {
-  storage.get('state', user, function (err, res) {
-    if (!res) {
-      storage.set('state', user, 'greeting-p0', function (err, res) {
-        prompt = prompts['greeting-p0']
-        cb(prompt[0], prompt[2].map(function (oid) {
-          return options[oid][0];
-        }));
-      })
-    } else {
-      act(res);
-    }
-  })
+var receive = function (user, text, oid, cb) {
+  if (oid) {
+    language = oid.substr(0, 2);
+    oid = oid.substr(2);
+    var pid = options[oid][1];
+    var prompt = prompts[pid];
+    cb(prompt[0], prompt[2].map(function (oid) {
+      return options[oid][0];
+    }), prompt[2], language);
+  } else {
+    storage.get('state', user, function (err, res) {
+      if (!res) {
+        trigger_greeting(user);
+      } else {
+        act(res);
+      }
+    });
+  }
 
   var act = function (pid) {
     prompt = prompts[pid];
@@ -31,16 +36,26 @@ var receive = function (user, text, cb) {
         var prompt = prompts[pid];
         cb(prompt[0], prompt[2].map(function (oid) {
           return options[oid][0];
-        }));
+        }), prompt[2]);
       } else {
-        cb(response.respond(user, text), []);
+        cb(response.respond(user, text), [], []);
       }
     } else if (prompt[1] == 'search') {
-      cb(response.respond(user, text), []);
+      cb(response.respond(user, text), [], []);
     }
   }
 }
 
+var trigger_greeting = function (user) {
+  storage.set('state', user, 'greeting-p0', function (err, res) {
+    prompt = prompts['greeting-p0'];
+    cb(prompt[0], prompt[2].map(function (oid) {
+      return options[oid][0];
+    }), prompt[2]);
+  })
+}
+
 module.exports = {
-  'receive': receive
+  'receive': receive,
+  'trigger_greeting': trigger_greeting
 }
