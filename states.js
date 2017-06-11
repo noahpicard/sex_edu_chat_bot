@@ -53,9 +53,11 @@ var receive = function (user, text, oid, cb) {
       } else if (prompt[1] == 'image_search') {
         cleantext = texttools.cleanText(text);
         if (images[cleantext]) {
-          cb(images[cleantext].text, [], [], null, images[cleantext].image_url);
+          storage.set('state', user, 'greeting-p0', function (err, res) {
+            cb(images[cleantext].text, [], [], null, images[cleantext].image_url);
+          });
         } else {
-          cb('Couldn\'t find a picture of that--sorry!', [], [], null, null);
+          cb('Couldn\'t find a picture of that! Try again?', [], [], null, null);
         }
       } else if (prompt[1] == 'search') {
         trigger_search(user, text, cb);
@@ -80,7 +82,7 @@ var trigger_greeting = function (user, cb) {
     cb(prompt[0], prompt[2].map(function (oid) {
       return options[oid][0];
     }), prompt[2], null, null);
-  })
+  });
 }
 
 module.exports = {

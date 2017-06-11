@@ -22,5 +22,17 @@
   "pad": {
     "text": "Show this to your local NGO to receive your pads",
     "image_url": "http://girladvice103.weebly.com/uploads/5/9/3/3/59335013/9073522_orig.jpg"
+  },
+  "birth control": {
+    "text": "Show this to your local NGO to receive your birth control",
+    "image_url": "http://affinitymagazine.us/wp-content/uploads/2017/01/pill2.jpg"
+  },
+  "menstrual cup": {
+    "text": "Show this to your local NGO to receive your menstrual cups",
+    "image_url": "http://thesweethome.com/wp-content/uploads/sites/3/2016/12/menstrual-cups-testing-annotated-lowres-6840.jpg"
+  },
+  "menstrual cups": {
+    "text": "Show this to your local NGO to receive your menstrual cups",
+    "image_url": "http://thesweethome.com/wp-content/uploads/sites/3/2016/12/menstrual-cups-testing-annotated-lowres-6840.jpg"
   }
 }
