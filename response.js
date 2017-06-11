@@ -81,6 +81,8 @@ var stringDistance = function(str1, str2) {
 	str2 = removePunc(str2);
 	var arr1 = str1.split(" ");
 	var arr2 = str2.split(" ");
+	console.log(arr1);
+	console.log(arr2);
 	var matches = 0;
 	var dict1 = countDict(arr1);
 	var dict2 = countDict(arr2);
@@ -90,27 +92,29 @@ var stringDistance = function(str1, str2) {
 			matches += Math.min(dict1[key], dict2[key]);
 		}
 	}
-	matches = matches/(arr1.length+arr2.length);
+
+	matches = matches/(1+(Math.abs(arr1.length-arr2.length)));
 	return matches;
 }
 
-var getCloserString = function(closestStr, newStr, text) {
-	closestStr = closestStr.toLowerCase();
-	newStr = newStr.toLowerCase();
-
-	var closestScore = stringDistance(closestStr, text);
-	var newScore = stringDistance(newStr, text);
-	if (newScore > closestScore) {
-		return newStr;
-	}
-	return closestStr;
-}
 
 var getClosestString = function(questions, text) {
 	var closestQuestion = '';
+	var closestScore = 0;
 	for (i in questions) {
 		var question = questions[i];
-		closestQuestion = getCloserString(closestQuestion, question, text);
+		question = question.toLowerCase();
+
+		var scoreQuestion = stopwords.removeStopWords(question).join(' ')
+		if (text.length != stopwords.removeStopWords(text).join(' ').length) {
+			scoreQuestion = question;
+		}
+
+		var newScore = stringDistance(scoreQuestion, text);
+		if (newScore > closestScore) {
+			closestQuestion = question;
+			closestScore = newScore;
+		}
 	}
 	return closestQuestion;
 }
