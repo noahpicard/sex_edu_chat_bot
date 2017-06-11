@@ -151,7 +151,7 @@ var messenger_receive = function (event) {
             arr.push("Find local resources");
             arr.push("LOCAL");
             googleTranslate.translate(arr, translation.detectedSourceLanguage, function(err, translations) {
-                //messenger_send(event.sender.id, translations[0].translatedText);
+                messenger_send(event.sender.id, translations[0].translatedText);
                 translations.shift();
                 messenger_send_quiz(event.sender.id, "hI", translations);
             });
@@ -162,9 +162,6 @@ var messenger_receive = function (event) {
         }
         addMonkeyIfPossible(event,reply);
 
-  	  googleTranslate.translate(reply, translation.detectedSourceLanguage, function(err, translation) {
-  		  messenger_send(event.sender.id, translation.translatedText);
-  	  });
     });
     
     //messenger_send(event.sender.id, response.respond(event.sender.id, event.message.text));
