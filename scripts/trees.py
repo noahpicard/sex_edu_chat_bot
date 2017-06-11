@@ -25,7 +25,7 @@ greeting_tree = {
     ("I have a question", {
       ("🐵 Great, try asking me a question!\nI can answer something like 'What is a STD?'\nYou can also discover new questions by saying 'Show me random questions!'\nGo for it!", "search"): []
     }),
-    ("My hygeine product?", {
+    ("My hygiene product?", {
       ("🐵 Ok! I'm going to ask you a few questions to see what product is best for you. I know it's hard to figure out which one works best for you! Do you like to exercise during your period?", "buttons"): [
         ("Yes", {
           ("Great! 🙉 You will be most comfortable going with tampons since they make it easier for you to move around, especially if you want to swim. Check out Local Resources to find out where you can get tampons near you!", "buttons"): [
