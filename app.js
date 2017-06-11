@@ -41,7 +41,7 @@ app.post('/messenger', function (req, res) {
 
 var messenger_receive = function (event, user, text, oid) {
   googleTranslate.translate(text, 'en', function(err, translation) {
-    states.receive(user, translation.translatedText, oid, function (reply, buttons, oids, target_language) {
+    states.receive(user, translation.translatedText, oid, function (reply, buttons, oids, target_language, image_url) {
       addMonkeyIfPossible(event, reply, function () {
         buttons.push(reply);
         if (text == '') {
@@ -58,6 +58,9 @@ var messenger_receive = function (event, user, text, oid) {
             buttons = [];
           }
           messenger_send_prompt(user, reply, buttons, oids, language);
+          if (image_url) {
+            messenger_send_pic(user, image_url, function () {});
+          }
         });
       });
     });
@@ -179,6 +182,8 @@ function addMonkeyIfPossible(event, translated, cb) {
         messenger_send_pic(event.sender.id, "http://orig12.deviantart.net/08c8/f/2017/161/b/f/monkeyassets_by_chibixi-dbcagez.gif", cb);
     } else if(translated.indexOf("condom") != -1) {
         messenger_send_pic(event.sender.id, "http://orig03.deviantart.net/20bb/f/2017/162/4/5/monkeybanana_by_chibixi-dbcaxfr.gif", cb);
+    } else {
+      cb();
     }
 }
 

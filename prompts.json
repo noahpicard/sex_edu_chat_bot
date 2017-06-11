@@ -22,8 +22,8 @@
     ]
   ], 
   "greeting-p3": [
-    "[unimplmented] ask me a question instead", 
-    "search", 
+    "What specifically are you looking for?", 
+    "image_search", 
     []
   ], 
   "greeting-p4": [
