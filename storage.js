@@ -1,5 +1,5 @@
 var redis = require("redis");
-client = redis.createClient();
+client = redis.createClient(process.env.REDIS_URL);
 
 var set = function (table, user, value, callback) {
   var key = table + '-' + user;
