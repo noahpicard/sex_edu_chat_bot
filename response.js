@@ -160,7 +160,7 @@ var respond = function (userId, text) {
 		return "🙉 Aww golly gee! Thanks!"
 	}
 	if (checkGreetings(text)) {
-		return "🐵 I'm Madeliene!\nGreat to meet you!\n\nWhat are you interested in?\n1. I want to learn about sex\n2. I want to get hygiene products\n3. I want to talk to a real person"
+		return "🐵 I'm Madeliene!\nGreat to meet you!\n\nWhat are you interested in?\n1. I want to learn about sex\n2. I want to get hygiene products\n3. I want to find resources near me"
 	}
 	if (checkAgreement(text)) {
 		return "🙉 That's great to hear!"
