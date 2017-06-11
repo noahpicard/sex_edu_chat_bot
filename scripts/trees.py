@@ -36,6 +36,7 @@ greeting_tree = {
       ]
     }),
     ("Find local resources", {
+      ("What country are you in?", "locate"): [],
       ("What specifically are you looking for?", "image_search"): []
     })
   ]
