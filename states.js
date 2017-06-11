@@ -3,20 +3,7 @@ var prompts = require('./prompts');
 var options = require('./options');
 var search = require('./search');
 var images = require('./images');
-
-var hasWords = function(text, wordList) {
-	var arr = text.split(" ");
-	for (i in wordList) {
-		var word = wordList[i];
-		if (arr.indexOf(word) !== -1) {
-			return true;
-		}
-	}
-	return false;
-}
-var checkGreetings = function(text) {
-	return hasWords(text, ["hi", "hello", "hey"]);
-};
+var texttools = require('./texttools');
 
 var receive = function (user, text, oid, cb) {
   if (oid) {
@@ -42,7 +29,7 @@ var receive = function (user, text, oid, cb) {
   }
 
   var act = function (pid) {
-    if (checkGreetings(text)) {
+    if (texttools.checkGreetings(text)) {
       trigger_greeting(user, cb);
     } else {
       prompt = prompts[pid];
@@ -64,12 +51,16 @@ var receive = function (user, text, oid, cb) {
           trigger_search(user, text, cb);
         }
       } else if (prompt[1] == 'image_search') {
-        cleantext = text.toLowerCase().replace(/[.,\/#!?$%\^&\*;:{}=\-_`~()]/g,"");
+        cleantext = texttools.cleanText(text);
         if (images[cleantext]) {
           cb(images[cleantext].text, [], [], null, images[cleantext].image_url);
         } else {
           cb('Couldn\'t find a picture of that--sorry!', [], [], null, null);
         }
+			} else if (prompt[1] == 'locate') {
+        storage.set('location', user, text, function (err, res) {
+	        cb('Location stored', [], [], null, null);
+				});
       } else if (prompt[1] == 'search') {
         trigger_search(user, text, cb);
       }

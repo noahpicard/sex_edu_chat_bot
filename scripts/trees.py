@@ -21,11 +21,11 @@ import json
 ################################
 
 greeting_tree = {
-  ("🐵 I'm Madeliene! 😀\nGreat to meet you!\n\nWhat are you interested in?\n1. I want to learn about sex\n2. I want to get hygiene products\n3. I want to find resources near me", "buttons"): [
-    ("Learn about sex", {
+  ("🐵 I'm Madeleine!\nGreat to meet you!\n\nI'm an expert on reproductive health. I can help you by answering questions, giving an assessment, or connecting you with local resources. What would you like to do?", "buttons"): [
+    ("Question", {
       ("Ask me a question then!", "search"): []
     }),
-    ("Get hygiene products", {
+    ("Assessment", {
       ("Ok! I'm going to ask you a few questions to see what product is best for you. Do you like to exercise during your period?", "buttons"): [
         ("Yes", {
           ("Great! You will be most comfortable going with tampons", "search"): []
@@ -35,9 +35,12 @@ greeting_tree = {
         })
       ]
     }),
-    ("Find local resources", {
-      ("What country are you in?", "locate"): [],
-      ("What specifically are you looking for?", "image_search"): []
+    ("Local resources", {
+      ("What country are you in?", "locate"): [
+        ("", {
+            ("What specifically are you looking for?", "image_search"): []
+        })
+      ],
     })
   ]
 }

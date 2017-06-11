@@ -1,5 +1,6 @@
 var answers = require('./answers');
 var stopwords = require('./stopwords');
+var texttools = require('./texttools');
 
 var makeDictionary = function(d) {
 	var final = {}
@@ -13,27 +14,6 @@ var makeDictionary = function(d) {
 
 var answerDict = makeDictionary(answers);
 
-var removePunc = function(text) {
-	return text.replace(/[.,\/#!?$%\^&\*;:{}=\-_`~()]/g,"");
-}
-
-var hasWords = function(text, wordList) {
-	var arr = text.split(" ");
-	for (i in wordList) {
-		var word = wordList[i];
-		if (arr.indexOf(word) !== -1) {
-			return true;
-		}
-	}
-	return false;
-}
-
-var cleanText = function(text) {
-	text = text.toLowerCase();
-	text = removePunc(text);
-	return text;
-}
-
 var countDict = function(arr) {
 	var dict = {};
 	for (i in arr) {
@@ -46,34 +26,10 @@ var countDict = function(arr) {
 	return dict;
 }
 
-var checkFave = function(text) {
-	return hasWords(text, ["you"]) && hasWords(text, ["best", "fav", "fave", "favorite", "awesome", "smart"]);
-};
-
-var checkThanks = function(text) {
-	return hasWords(text, ["thank", "thanks"]);
-};
-
-var checkParting = function(text) {
-	return hasWords(text, ["goodbye", "bye", "byebye"]);
-};
-
-var checkGreetings = function(text) {
-	return hasWords(text, ["hi", "hello", "hey"]);
-};
-
-var checkAgreement = function(text) {
-	return hasWords(text, ["yes", "yep", "okay"]);
-};
-
-var checkLocalResources = function(text) {
-	return hasWords(text, ["local"]);
-};
-
 var stringDistance = function(str1, str2) {
 
-	str1 = removePunc(str1);
-	str2 = removePunc(str2);
+	str1 = texttools.removePunc(str1);
+	str2 = texttools.removePunc(str2);
 	var arr1 = str1.split(" ");
 	var arr2 = str2.split(" ");
 	var matches = 0;
@@ -166,19 +122,19 @@ var searchAnswers = function (userId, text) {
 }
 
 var respond = function (user, text, cb) {
-	text = cleanText(text);
+	text = texttools.cleanText(text);
 
-	if (checkGreetings(text)) {
+	if (texttools.checkGreetings(text)) {
 		cb(null);
-	} else if (checkLocalResources(text)) {
+	} else if (texttools.checkLocalResources(text)) {
 		cb(text.substring(5, text.length));
-	} else if (checkFave(text)) {
+	} else if (texttools.checkFave(text)) {
 		cb("🙉 Aww golly gee! Thanks! 😀");
-	} else if (checkThanks(text)) {
+	} else if (texttools.checkThanks(text)) {
 		cb("🙈 You're welcome! Happy to help! 😀");
-	} else if (checkAgreement(text)) {
+	} else if (texttools.checkAgreement(text)) {
 		cb("🙉 That's great to hear!");
-	} else if (checkParting(text)) {
+	} else if (texttools.checkParting(text)) {
 		cb("🐒 See you later!\nCome by any time you have questions!");
 	} else {
 		cb(searchAnswers(user, text));

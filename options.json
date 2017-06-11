@@ -1,22 +1,26 @@
 {
   "greeting-o0": [
-    "Learn about sex", 
+    "Question", 
     "greeting-p1"
   ], 
   "greeting-o1": [
-    "Get hygiene products", 
+    "Assessment", 
     "greeting-p2"
   ], 
   "greeting-o2": [
-    "Find local resources", 
+    "Local resources", 
     "greeting-p3"
   ], 
   "greeting-o3": [
-    "Yes", 
+    "", 
     "greeting-p4"
   ], 
   "greeting-o4": [
-    "No", 
+    "Yes", 
     "greeting-p5"
+  ], 
+  "greeting-o5": [
+    "No", 
+    "greeting-p6"
   ]
 }
